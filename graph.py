@@ -31,9 +31,8 @@ if __name__ == "__main__":
     print("Matriz de adyacencia ORIGINAL")
     print(adyacent_matrix)
 
-"""    pos = nx.spring_layout(G)  # Layout para la visualización`
+    pos = nx.spring_layout(G)  # Layout para la visualización`
     nx.draw(G, pos, with_labels=True, node_size=800, node_color="skyblue",
             font_size=12, font_color="black", font_weight="bold")
     plt.title("Grafo")
     plt.show()
-"""
