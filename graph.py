@@ -1,6 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-
+from iterator import PowerIterator
 
 if __name__ == "__main__":
     G = nx.DiGraph()
@@ -36,3 +36,10 @@ if __name__ == "__main__":
             font_size=12, font_color="black", font_weight="bold")
     plt.title("Grafo")
     plt.show()
+
+    power_iterator = PowerIterator(G)
+    pagerank = power_iterator.calculate_pagerank()
+
+    print("Pagerank:")
+    for node, rank in sorted(pagerank.items(), key=lambda x: x[1], reverse=True):
+        print(f"{node}: {rank}")
