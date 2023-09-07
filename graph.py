@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 from iterator import PowerIterator
+from randomWalker import RandomWalker
 
 if __name__ == "__main__":
     G = nx.DiGraph()
@@ -43,3 +44,15 @@ if __name__ == "__main__":
     print("Pagerank:")
     for node, rank in sorted(pagerank.items(), key=lambda x: x[1], reverse=True):
         print(f"{node}: {rank}")
+
+
+    # walker = RandomWalker(G)
+
+    # # Realizar un "random walk with restart" desde el nodo 1 durante 1000 pasos
+    # start_node = 1
+    # num_steps = 1000
+    # pagerank = walker.random_walk_with_restart(start_node, num_steps)
+
+    # print("PageRank resultante:")
+    # for node, pr in sorted(pagerank.items(), key=lambda x: x[1], reverse=True):
+    #     print(f"Nodo {node}: PageRank = {pr}")
