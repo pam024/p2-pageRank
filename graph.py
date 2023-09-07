@@ -1,6 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-
+import numpy as np
+import string
 
 if __name__ == "__main__":
     G = nx.DiGraph()
@@ -28,11 +29,18 @@ if __name__ == "__main__":
 
     adyacent_matrix = nx.attr_matrix(G, edge_attr='weight', rc_order=nodes)
 
-    print("Matriz de adyacencia ORIGINAL")
-    print(adyacent_matrix)
-
     pos = nx.spring_layout(G)  # Layout para la visualización`
+
+
+    plt.figure(0)
     nx.draw(G, pos, with_labels=True, node_size=800, node_color="skyblue",
-            font_size=12, font_color="black", font_weight="bold")
-    plt.title("Grafo")
+        font_size=12, font_color="black", font_weight="bold")
+
+    
+    plt.figure(1)
+    plt.matshow(adyacent_matrix)
+    plt.xticks(np.arange(0, len(nodes)), nodes)
+    plt.yticks(np.arange(0, len(nodes)), nodes)
+
+
     plt.show()
