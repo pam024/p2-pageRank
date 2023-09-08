@@ -39,6 +39,8 @@ if __name__ == "__main__":
     
     plt.figure(1)
     plt.matshow(adyacent_matrix)
+    plt.set_cmap('Blues')
+    plt.colorbar()
     plt.xticks(np.arange(0, len(nodes)), nodes)
     plt.yticks(np.arange(0, len(nodes)), nodes)
 
