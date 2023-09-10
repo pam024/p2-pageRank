@@ -1,9 +1,7 @@
 import networkx as nx
 import random
-import keyboard
 
-
-class RandomWalker:
+class Distributor:
     def __init__(self, graph, amort_prob=0.85):
         self.graph = graph
         self.amort_prob = amort_prob
@@ -58,9 +56,9 @@ class RandomWalker:
         return pagerank
 
 
-# Ejemplo de uso:
+
 if __name__ == "__main__":
-    # Crear un grafo de ejemplo
+
     G = nx.DiGraph()
     G.add_edges_from([("A", "C"), ("A", "N"), ("A", "K"),
                       ("C", "D"), ("C", "K"),
@@ -74,12 +72,8 @@ if __name__ == "__main__":
                       ("M", "B"), ("M", "A"),
                       ("N", "O"), ("O", "N")])
 
-    # Crear un objeto RandomWalker
-    walker = RandomWalker(G)
 
-    # Realizar un "random walk with restart" desde el nodo 1 durante 1000 pasos
-
-    num_steps = 20
+    walker = Distributor(G)
     pagerank = walker.random_walk_with_restart("A")
 
     print("Final PageRank:")
