@@ -1,8 +1,9 @@
+import numpy as np
 import networkx as nx
 import random
 
 class RandomWalker:
-    def __init__(self, graph, amort_prob=0.85):
+    def __init__(self, graph, amort_prob):
         self.graph = graph
         self.amort_prob = amort_prob
         self.node_list = list(self.graph.nodes())
