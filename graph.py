@@ -7,10 +7,15 @@ import numpy as np
 if __name__ == "__main__":
     G = nx.DiGraph()
 
+    # nodes = ["A", "B", "C"]
+    # edges_and_weights = [
+    #     ("A", "C", 1/2), ("A", "B", 1/2),
+    #     ("B", "C", 1)
+    # ]
+    
+
     nodes = ["A", "B", "C", "D", "E", "F", "G",
              "H", "I", "J", "K", "L", "M", "N", "O"]
-    G.add_nodes_from(nodes)
-
     edges_and_weights = [
         ("A", "C", 1/3), ("A", "N", 1/3), ("A", "K", 1/3),
         ("C", "D", 1/2), ("C", "K", 1/2),
@@ -25,10 +30,7 @@ if __name__ == "__main__":
         ("N", "O", 1), ("O", "N", 1)
     ]
 
-    # edges_and_weights = [
-    #     ("A", "C", 1/2), ("A", "B", 1/2),
-    #     ("B", "C", 1)
-    # ]
+    G.add_nodes_from(nodes)
 
     for init_node, end_node, weight in edges_and_weights:
         G.add_edge(init_node, end_node, weight=weight)
