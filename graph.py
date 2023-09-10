@@ -1,14 +1,14 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-from iterator import PowerIterator
-from randomWalker import RandomWalker
+from method_iterator import PowerIterator
+# from randomWalker import RandomWalker
 import numpy as np
 
 if __name__ == "__main__":
     G = nx.DiGraph()
 
     nodes = ["A", "B", "C", "D", "E", "F", "G",
-             "H", "I", "J", "K", "L", "M", "N", "O", "P"]
+             "H", "I", "J", "K", "L", "M", "N", "O"]
     G.add_nodes_from(nodes)
 
     edges_and_weights = [
@@ -22,8 +22,13 @@ if __name__ == "__main__":
         ("J", "I", 1/2), ("J", "L", 1/2),
         ("K", "F", 1),
         ("M", "B", 1/2), ("M", "A", 1/2),
-        ("N", "P", 1), ("P", "O", 1), ("O", "N", 1)
+        ("N", "O", 1), ("O", "N", 1)
     ]
+
+    # edges_and_weights = [
+    #     ("A", "C", 1/2), ("A", "B", 1/2),
+    #     ("B", "C", 1)
+    # ]
 
     for init_node, end_node, weight in edges_and_weights:
         G.add_edge(init_node, end_node, weight=weight)

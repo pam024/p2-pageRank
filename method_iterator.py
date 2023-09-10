@@ -10,11 +10,12 @@ class PowerIterator:
         self.nodes = list(self.graph.nodes)
         self.num_nodes = len(self.nodes)
         self.adjacency_matrix = nx.adjacency_matrix(self.graph, nodelist=self.nodes).toarray()
-        self.adjacency_matrix = self.adjacency_matrix / self.adjacency_matrix.sum(axis=0, keepdims=True)  # Normalize rows
+        self.adjacency_matrix = self.adjacency_matrix / self.adjacency_matrix.sum(axis=0, keepdims=True)  
         # Inicializar el vector de PageRank de manera uniforme
         self.pagerank_vector = np.ones(self.num_nodes) / self.num_nodes
         
     def calculate_pagerank(self, damping_factor):
+        print(self.adjacency_matrix)
         for node, pr in sorted(dict(zip(self.nodes, self.pagerank_vector)).items(), key=lambda x: x[1], reverse=True):
                 print(f"Nodo {node}: PageRank = {pr}")
                 
