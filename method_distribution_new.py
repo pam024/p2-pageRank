@@ -6,53 +6,29 @@ class Distributor:
         self.graph = graph
         self.amort_prob = amort_prob
         self.node_list = list(self.graph.nodes())
-        self.visited = set()
 
     def random_walk_with_restart(self, start_node=None):
         teleport = False
-
-        if start_node is None:
-            start_node = random.choice(self.node_list)
-
+        position = 1
         current_node = start_node
         pagerank = {node: 1/len(list(self.node_list))
                     for node in self.node_list}
 
-        while True:
-            input_key = input(
-                "Press 1 to make a teleport or Enter to continue: ")
+        attempts = 10000
 
-            if input_key == '1':
-                teleport = True
-                print("Teleporting...")
+        while attempts > 0:
 
-            print(self.visited)
             neighbors = list(self.graph.neighbors(current_node))
+            pagerank[current_node] = (1 - self.amort_prob) / len(self.node_list) + self.amort_prob * sum(
+                pagerank[neighbor] / len(neighbors) for neighbor in neighbors)
 
-            self.visited.add(current_node)
+            next_node = self.node_list[position]
 
-            if teleport or len(neighbors) == 0 or random.random() < 0.1:
-                pagerank[current_node] += (
-                    1 - self.amort_prob) / len(self.node_list)
-                current_node = random.choice(self.node_list)
-            else:
-                pagerank[current_node] = (1 - self.amort_prob) / len(self.node_list) + self.amort_prob * sum(
-                    pagerank[neighbor] / len(neighbors) for neighbor in neighbors)
-
-                next_node = random.choice(neighbors)
-                if current_node == next_node:
-                    next_node = random.choice(self.node_list)
-                current_node = next_node
-
-            if len(self.visited) == len(self.node_list):
-                break
             total_pagerank = sum(pagerank.values())
             pagerank = {node: pr / total_pagerank for node,
                         pr in pagerank.items()}
-
-            for node, pr in sorted(pagerank.items(), key=lambda x: x[1], reverse=True):
-                print(f"Node {node}: PageRank = {pr}")
-            print()
+            position = (position + 1) % len(list(self.node_list))
+            attempts -= 1
         return pagerank
 
 

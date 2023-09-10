@@ -22,6 +22,8 @@ class RandomWalker:
         self.visits += 1
         neighbors = list(self.graph.neighbors(self.current_node[0]))
 
+        self.walker_print()
+
         if teleport or len(neighbors) == 0:             
             self.teleports += 1
             self.current_node = random.choice(self.node_list)
@@ -33,6 +35,7 @@ class RandomWalker:
             self.current_node = next_node
 
         self.amort_prob = self.teleports/self.visits
+        
 
     def walker_print(self):
         for node, pr in sorted(self.node_visits.items(), key=lambda x: x[1], reverse=True):
@@ -58,19 +61,15 @@ if __name__ == "__main__":
 
     walker = RandomWalker(G)
 
-    for _ in range(10000):
-        if (random.random() < 0.15):
+
+    converged = False
+    while converged == False:
+        input_key = input("Press 1 to make a teleport or Enter to continue: ")
+
+        if input_key == '1':
             teleport = True
             walker.random_walk(teleport)
+            print("Teleporting...")
         else:
             walker.random_walk()
 
-    walker.walker_print()
-    # while True:
-    #     input_key = input(
-    #         "Press 1 to make a teleport or Enter to continue: ")
-    #     if input_key == '1':
-    #         teleport = True
-    #         walker.random_walk(teleport)
-    #     else:
-    #         walker.random_walk()
