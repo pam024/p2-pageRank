@@ -14,10 +14,10 @@ class Distributor:
         pagerank = {node: 1/len(list(self.node_list))
                     for node in self.node_list}
 
-        attempts = 10000
+        attempts = 1000
 
         while attempts > 0:
-
+            input_key = input("Press Enter to continue: ")
             neighbors = list(self.graph.neighbors(current_node))
             pagerank[current_node] = (1 - self.amort_prob) / len(self.node_list) + self.amort_prob * sum(
                 pagerank[neighbor] / len(neighbors) for neighbor in neighbors)
@@ -28,7 +28,11 @@ class Distributor:
             pagerank = {node: pr / total_pagerank for node,
                         pr in pagerank.items()}
             position = (position + 1) % len(list(self.node_list))
+            current_node = self.node_list[position]
             attempts -= 1
+            for node, pr in sorted(pagerank.items(), key=lambda x: x[1], reverse=True):
+                print(f"Node {node}: PageRank = {pr}")
+
         return pagerank
 
 
